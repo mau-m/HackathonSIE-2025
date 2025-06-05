@@ -1,0 +1,38 @@
+const express = require('express');
+const cors = require('cors');
+const formularioRoutes = require('./routes/FormularioRoutes');
+const authenticateToken = require('./config/authMiddleware');
+const path = require('path');
+
+const port = process.env.PORT || 3000;
+// Inicializar la aplicación Express
+
+const app = express();
+app.set('port', port);
+
+// Middlewares globales
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Servir archivos estáticos desde la carpeta "public"
+//app.use(express.static(path.join(__dirname, 'public')));
+
+// Rutas protegidas (ejemplo con token)
+app.use('/api/v1/formulario', formularioRoutes); //FALTA AGREGAR EL MIDDLEWARE DEL TOKEN
+
+// Ruta por defecto
+app.get('/', (req, res) => {
+    res.send('API de Formularios en funcionamiento ✅');
+});
+
+// Manejo de errores
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Error interno del servidor' });
+});
+
+// Iniciar servidor
+app.listen(port, () => {
+    console.log(`Servidor corriendo en http://localhost:${port}`);
+});

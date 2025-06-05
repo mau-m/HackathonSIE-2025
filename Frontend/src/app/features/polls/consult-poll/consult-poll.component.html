@@ -1,11 +1,15 @@
 <!-- Contenedor principal -->
 <div class="container-fluid d-flex flex-column align-items-center vh-100 py-2 px-3 px-sm-4 px-md-5">
 
+
   <!-- Encabezado -->
   <section class="consulta d-flex w-100 mb-1 align-items-center justify-content-between flex-wrap">
+    <!-- Etiqueta izquierda -->
     <div class="etiqueta flex-grow-1 text-center py-3">
-      <h2 class="m-0 fs-3">Consultar resultados</h2>
+      <h2 class="m-0 fs-3">Resultados</h2>
     </div>
+
+    <!-- Imagen de login a la derecha -->
     <div class="datos-form pe-3">
       <img src="/assets/img/user2.png" alt="Login" class="rounded-circle"
         style="width: 40px; height: 40px; cursor: pointer;" (click)="login()" />
@@ -25,31 +29,16 @@
     </div>
   </nav>
 
-  <!-- Resultados -->
-  <section class="w-100 overflow-auto flex-grow-1" *ngIf="resultados?.length">
-    <h3 class="text-center mb-4">Encuesta: {{ encuestaTitulo }}</h3>
-
-    <div *ngFor="let opcion of resultados" class="mb-3">
-      <div class="d-flex justify-content-between">
-        <strong>{{ opcion.texto }}</strong>
-        <span>{{ opcion.votos }} votos ({{ opcion.porcentaje }}%)</span>
-      </div>
-      <div class="progress" style="height: 20px;">
-        <div class="progress-bar" role="progressbar"
-             [style.width.%]="opcion.porcentaje"
-             style="background-color: purple;">
+  <!-- Listado de encuestas -->
+  <section class="w-100 overflow-auto flex-grow-1">
+    <div *ngFor="let encuesta of encuestas" class="card mb-3">
+      <div class="card-body d-flex justify-content-between align-items-center">
+        <div>
+          <h5>{{ encuesta.pregunta }}</h5>
+          <p><strong>Encuesta:</strong> {{ encuesta.nombre }}</p>
         </div>
+        <button class="btn btn-outline-primary" (click)="verResultados(encuesta.id)">Resultados</button>
       </div>
     </div>
-
-    <div class="my-4 text-center">
-      <h4>Total votos: {{ totalVotos }}</h4>
-    </div>
-
- <div style="max-width: 400px; margin: auto;">
-  <canvas #pieChart></canvas>
-</div>
-
   </section>
-
 </div>

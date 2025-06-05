@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup, User, onAuthStateChanged } from 'firebase/auth';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-// Importa o define aquí tu configuración Firebase
-import { firebaseConfig } from '../firebase.config'; // ajusta la ruta según dónde tengas tu config
+import { firebaseConfig } from '../firebase.config';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +13,23 @@ export class AuthService {
   private auth = getAuth(this.app);
   private provider = new GoogleAuthProvider();
 
-  constructor() {}
+  // BehaviorSubject para mantener el usuario actual y emitir cambios
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  public currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
 
-  async loginWithGoogle() {
+  constructor() {
+    // Escuchar cambios de estado de autenticación (login/logout)
+    onAuthStateChanged(this.auth, (user) => {
+      this.currentUserSubject.next(user);
+    });
+  }
+
+  async loginWithGoogle(): Promise<User> {
     try {
       const result = await signInWithPopup(this.auth, this.provider);
       const idToken = await result.user.getIdToken();
 
-      // Opcional: llama tu backend con el token si quieres
+      // Opcional: llamar backend con el token
       const response = await fetch("http://localhost:3000/api/v1/privado", {
         method: "GET",
         headers: {
@@ -31,10 +40,13 @@ export class AuthService {
       const data = await response.json();
       console.log("✅ Backend:", data);
 
-      return result.user; // Devuelve el usuario autenticado
+      // Actualizamos el currentUser
+      this.currentUserSubject.next(result.user);
+
+      return result.user;
     } catch (error) {
       console.error("❌ Error en login:", error);
-      throw error;  // Para que el componente pueda manejar el error
+      throw error;
     }
   }
 }

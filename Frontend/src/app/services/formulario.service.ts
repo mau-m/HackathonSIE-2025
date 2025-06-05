@@ -1,33 +1,49 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+interface Voto {
+  usuario: string;
+  formularioId: number;
+  opcionId: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class FormularioService {
-  private apiUrl = 'http://localhost:3000/api/v1/formulario';
+  private baseUrl = 'http://developer.jquiroz.net:3003/api/v1/formulario';  // Asegúrate que apunte al recurso correcto
+  private votoUrl = 'http://developer.jquiroz.net:3003/api/v1/voto';       // Ejemplo, cambia si es diferente
 
   constructor(private http: HttpClient) { }
 
   crearFormularioConOpciones(data: any) {
-    return this.http.post(this.apiUrl, data);
+    return this.http.post(this.baseUrl, data);
   }
 
   obtenerFormularios() {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.baseUrl);
   }
 
   obtenerFormularioPorId(id: number) {
-    return this.http.get(`${this.apiUrl}/${id}`);
+    return this.http.get(`${this.baseUrl}/${id}`);
   }
 
   cerrarFormulario(id: number) {
-    return this.http.put(`${this.apiUrl}/cerrar/${id}`, {});
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
-  enviarVoto(voto: { formularioId: number, opcionSeleccionada: string, usuario: string }) {
-    return this.http.post('http://localhost:3000/api/v1/votos', voto);
-    // Ajusta esta ruta si los votos también tienen un prefijo como '/api/v1/votos'
+  // enviarVoto(voto: { formularioId: number, opcionId: number, usuario: string }) {
+  //   return this.http.post(this.votoUrl, voto);
+  // }
+  enviarVoto(voto: Voto) {
+    return this.http.post(this.votoUrl, voto);
   }
+
+  obtenerResultadosPorId(id: number) {
+    return this.http.get(`${this.votoUrl}/${id}`);
+  }
+
+
+
 }
 

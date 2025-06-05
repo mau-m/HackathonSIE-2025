@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';  // <-- Importa HttpClientModule aquí
 import { AuthService } from '../../../services/auth.service';
-import { FormularioService } from '../../../services/formulario.service';  
+import { FormularioService } from '../../../services/formulario.service';
 
 @Component({
   selector: 'app-create-poll',
@@ -16,12 +16,12 @@ export class CreatePollComponent {
   descripcion: string = '';
   nombre: string = '';
   pregunta: string = '';
-  options: { valor: string }[] = [{ valor: '' }, { valor: '' }];
+  opciones: { valor: string }[] = [{ valor: '' }, { valor: '' }];
 
   constructor(
     private authService: AuthService,
     private formularioService: FormularioService
-  ) {}
+  ) { }
 
   login(): void {
     this.authService.loginWithGoogle()
@@ -34,13 +34,13 @@ export class CreatePollComponent {
   }
 
   agregarOpcion(): void {
-    this.options.push({ valor: '' });
+    this.opciones.push({ valor: '' });
   }
 
   crearEncuesta(): void {
-    const opcionesValidas = this.options
-      .map(op => op.valor.trim())
-      .filter(valor => valor !== '');
+    const opcionesValidas = this.opciones
+      .map(op => ({ opcion: op.valor.trim() }))
+      .filter(opcionObj => opcionObj.opcion !== '');
 
     if (!this.descripcion.trim() || opcionesValidas.length < 2) {
       alert('Por favor, agrega una descripción y al menos dos opciones.');
@@ -48,9 +48,11 @@ export class CreatePollComponent {
     }
 
     const encuesta = {
-      nombre: this.nombre,
-      pregunta: this.pregunta,
-      descripcion: this.descripcion,
+      formulario: {
+        nombre: this.nombre,
+        pregunta: this.pregunta,
+        descripcion: this.descripcion
+      },
       opciones: opcionesValidas
     };
 
@@ -59,11 +61,10 @@ export class CreatePollComponent {
         next: res => {
           console.log('Encuesta creada', res);
           alert('Encuesta creada correctamente');
-          // limpiar campos si quieres
           this.nombre = '';
           this.pregunta = '';
           this.descripcion = '';
-          this.options = [{ valor: '' }, { valor: '' }];
+          this.opciones = [{ valor: '' }, { valor: '' }];
         },
         error: err => {
           console.error('Error al crear encuesta', err);
@@ -71,4 +72,6 @@ export class CreatePollComponent {
         }
       });
   }
+
 }
+

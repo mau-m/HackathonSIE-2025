@@ -24,7 +24,7 @@
             <a href="/create-poll" class="nav-link">Crear</a>
         </div>
         <div class="nav-item flex-fill text-center border border-dark py-2">
-            <a href="/poll-results" class="nav-link">Consultar</a>
+            <a href="/consult-poll" class="nav-link">Consultar</a>
         </div>
     </nav>
 
@@ -32,7 +32,7 @@
 
     <!-- Nombre de la encuesta -->
     <div class="w-100 mb-3">
-        <input type="text" class="form-control descripcion-textarea" placeholder="Nombre de usuario" [(ngModel)]="nombre" />
+        <input type="text" class="form-control descripcion-textarea" placeholder="Nombre de a Encuesta" [(ngModel)]="nombre" />
     </div>
 
     <!-- Pregunta principal -->
@@ -48,7 +48,7 @@
         </div>
 
         <!--Opciones-->
-        <div *ngFor="let option of options; let i = index" class="w-50 mb-4">
+        <div *ngFor="let option of opciones; let i = index" class="w-50 mb-4">
             <input type="text" class="form-control opcion-input" [(ngModel)]="option.valor"
                 placeholder="Opción {{ i + 1 }}" name="opcion{{i}}" />
         </div>

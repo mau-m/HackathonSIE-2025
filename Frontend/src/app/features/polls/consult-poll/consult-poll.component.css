@@ -1,10 +1,11 @@
+
 .container {
   background: -webkit-linear-gradient(top, rgb(237, 235, 217), rgb(225, 240, 246));
 }
 
 /* Encabezado */
 .consulta {
-  background-color: #048a0f;
+  background-color: #048a0f; 
   color: white;
   padding: 10px 16px;
 }
@@ -12,6 +13,7 @@
 .consulta h2 {
   font-size: 1.5rem;
   font-weight: bold;
+  color: white;
   margin: 0;
 }
 
@@ -80,16 +82,5 @@
 
 .card-body button:hover {
   background-color: #40916c;
-  color: white;
-}
-
-.progress {
-  height: 22px;
-  background-color: #e9ecef;
-}
-
-.progress-bar {
-  transition: width 0.5s ease;
-  font-weight: bold;
   color: white;
 }

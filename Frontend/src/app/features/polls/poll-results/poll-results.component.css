@@ -1,0 +1,84 @@
+.container {
+  background: -webkit-linear-gradient(top, rgb(237, 235, 217), rgb(225, 240, 246));
+}
+
+/* Encabezado */
+.consulta {
+  background-color: #048a0f;
+  color: white;
+  padding: 10px 16px;
+}
+
+.consulta h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.login img {
+  background-color: white;
+  padding: 4px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: -1px solid white;
+}
+
+/* Barra de navegación */
+.nav-bar {
+  background-color: #1d801d; 
+  /*border-radius: 0 0 8px 8px;*/
+  overflow: hidden;
+  margin-top: 1px;
+}
+
+.nav-item {
+  background-color: #01742dd2; 
+  border: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-item a.nav-link {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  width: 100%;
+}
+
+.nav-item:hover {
+  background: linear-gradient(45deg, #05b90b, #40ad46); /*#0b360d*/
+  box-shadow: 0 0 8px 2px rgba(129, 199, 132, 0.7);
+  color: white;
+}
+
+.nav-item:hover a.nav-link {
+  color: white;
+}
+
+/* Tarjetas de encuesta */
+.card {
+  background-color: #e6f4ea; 
+  border-left: 6px solid #95d5b2; 
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 10px 16px;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-body button {
+  background-color: white;
+  border: 1px solid #40916c;
+  color: #40916c;
+  font-weight: bold;
+}
+
+.card-body button:hover {
+  background-color: #40916c;
+  color: white;
+}

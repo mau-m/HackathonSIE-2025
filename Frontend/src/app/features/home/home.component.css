@@ -1,0 +1,55 @@
+.btn-outline-purple {
+    color: #02723e; /* Color del texto */
+    border-color: #006e37; /* Color del borde */
+    margin-right: 35px; /*Espacio entre los botones*/
+    margin-top: 15px;
+  }
+  
+  .btn-outline-purple:hover {
+    background-color: #02723e;; /* Color de fondo al hacer hover */
+    color: rgb(158, 219, 184); /* Color del texto al hacer hover */
+  }
+  
+  .btn-outline-purple:focus, .btn-outline-purple:active {
+    background-color: #00ad42; /* Color de fondo al hacer focus o click */
+    border-color: #007041; /* Color del borde al hacer focus o click */
+    color: white; /* Color del texto al hacer focus o click */
+  }
+  
+  .form-control.transparent-background {
+    background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco con 50% de transparencia */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Borde con un poco de transparencia */
+    color: #333; /* Color del texto */
+  }
+  
+  .display-3{
+    color: #006e37;
+  }
+
+ .underline-animate {
+  position: relative;
+  display: inline-block;
+  color: inherit;
+}
+
+.underline-animate::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 3px;
+  width: 0;
+  background-color: green;
+  animation: underline-slide 1s ease-out forwards;
+  animation-delay: 0.3s; /* opcional: espera 0.3s antes de empezar */
+}
+
+@keyframes underline-slide {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+

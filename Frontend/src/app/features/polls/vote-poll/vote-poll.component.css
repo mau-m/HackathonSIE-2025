@@ -1,0 +1,99 @@
+/* Encabezado */
+.consulta {
+  background-color: #048a0f;
+  color: white;
+  padding: 10px 16px;
+}
+
+.consulta h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.login img {
+  background-color: white;
+  padding: 4px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: -1px solid white;
+}
+
+/* Barra de navegación */
+.nav-bar {
+  background-color: #1d801d;
+  overflow: hidden;
+  margin-top: 1px;
+}
+
+.nav-item {
+  background-color: #01742dd2;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+}
+
+.nav-item a.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  width: 100%;
+}
+
+.nav-item:hover {
+  background: linear-gradient(45deg, #05b90b, #40ad46);
+  box-shadow: 0 0 8px 2px rgba(129, 199, 132, 0.7);
+}
+
+.nav-item:hover a.nav-link {
+  color: white;
+}
+
+.descripcion-texto {
+  background-color: #e6f4ea;
+  color: #065f2c;
+  font-style:inherit;
+  border: 5px solid rgb(0, 90, 30);
+  border-radius: 8px;
+  font-weight: 500;
+  white-space: pre-wrap;
+}
+
+.opcion-voto {
+  background-color: #cdeac0;
+  border: 1px solid #048a0f;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 30%;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.2s;
+  user-select: none;
+}
+
+.opcion-voto:hover {
+  background-color: #b4ddb5;
+  transform: scale(1.02);
+}
+
+.opcion-voto.seleccionada {
+  background-color: #048a0f;
+  color: white;
+  border-color: #046d0b;
+}
+
+button.btn-success {
+  background-color: #048a0f;
+  border: none;
+  border-radius: 12px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px 20px;
+  font-weight: 600;
+  color: white;
+}
+
+button.btn-success:hover {
+  background-color: #05b90b;
+  box-shadow: 0 0 10px rgba(5, 185, 11, 0.4);
+}
+

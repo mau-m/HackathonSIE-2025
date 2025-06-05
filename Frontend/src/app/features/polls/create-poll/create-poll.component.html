@@ -1,0 +1,63 @@
+<!-- Contenedor principal -->
+<div class="container-fluid d-flex flex-column align-items-center vh-100 py-2 px-3 px-sm-4 px-md-5">
+
+    <!-- Encabezado -->
+    <section class="crear-encuesta d-flex w-100 mb-1 align-items-center justify-content-between flex-wrap">
+        <!-- Etiqueta izquierda -->
+        <div class="etiqueta flex-grow-1 text-center py-3">
+            <h2 class="m-0 fs-3">Crear encuesta</h2>
+        </div>
+
+        <!-- Imagen de login a la derecha -->
+        <div class="datos-form pe-3">
+            <img src="/assets/img/user2.png" alt="Login" class="rounded-circle"
+                style="width: 40px; height: 40px; cursor: pointer;" (click)="login()" />
+        </div>
+    </section>
+
+    <!-- Barra de navegación -->
+    <nav class="nav-bar d-flex w-100 mb-3">
+        <div class="nav-item flex-fill text-center border border-dark border-end-0 py-2">
+            <a href="/polls" class="nav-link">Inicio</a>
+        </div>
+        <div class="nav-item flex-fill text-center border border-dark border-end-0 py-2">
+            <a href="/create-poll" class="nav-link">Crear</a>
+        </div>
+        <div class="nav-item flex-fill text-center border border-dark py-2">
+            <a href="/poll-results" class="nav-link">Consultar</a>
+        </div>
+    </nav>
+
+    <!-- Formulario de la encuesta -->
+    <section class="w-100 d-flex flex-column align-items-center">
+        <div class="w-100 mb-3">
+            <textarea rows="3" class="form-control descripcion-textarea"
+                placeholder="Escribe una descripción de la encuesta" [(ngModel)]="descripcion"></textarea>
+        </div>
+
+        <!--Opciones-->
+        <div *ngFor="let option of options; let i = index" class="w-50 mb-4">
+            <input type="text" class="form-control opcion-input" [(ngModel)]="option.valor"
+                placeholder="Opción {{ i + 1 }}" name="opcion{{i}}" />
+        </div>
+
+        <!-- Botón para agregar opción -->
+        <div class="m-4">
+            <button class="btn btn-outline-success" (click)="agregarOpcion()">Agregar una opción</button>
+        </div>
+        <div class="imagen-uam mb-4">
+            <img src="/assets/img/uam_poll.png" alt="Logo UAM" class="img-uam-central">
+        </div>
+
+        <!-- Botón para crear encuesta -->
+        <div>
+            <button class="btn btn-success btn-lg" (click)="crearEncuesta()">Crear encuesta</button>
+        </div>
+    </section>
+    <!-- Logo institucional -->
+    <!-- <div class="logo-fondo">
+        <img src="/assets/img/uam_poll.png" alt="Logo UAM">
+    </div> -->
+
+
+</div>

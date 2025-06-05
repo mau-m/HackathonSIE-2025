@@ -1,0 +1,10 @@
+body {
+    margin: 0; 
+    padding: 0; 
+    background: -webkit-linear-gradient(bottom, rgba(55, 167, 49, 0.747), rgb(194, 211, 218)); /* Gradiente para navegadores WebKit */
+    background-attachment: fixed; /* Hace que el fondo permanezca fijo al hacer scroll */
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

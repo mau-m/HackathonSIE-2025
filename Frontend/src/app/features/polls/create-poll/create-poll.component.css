@@ -1,0 +1,131 @@
+.container {
+  background: -webkit-linear-gradient(top, rgb(237, 235, 217), rgb(225, 240, 246));
+}
+
+/* Encabezado */
+.crear-encuesta {
+  background-color: #048a0f;
+  color: white;
+  padding: 10px 16px;
+}
+
+.crear-encuesta h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.login img {
+  background-color: white;
+  padding: 4px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+/* Barra de navegación */
+.nav-bar {
+  background-color: #1d801d;
+  overflow: hidden;
+  margin-top: 1px;
+}
+
+.nav-item {
+  background-color: #01742dd2;
+  border: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-item a.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  width: 100%;
+}
+
+.nav-item:hover {
+  background: linear-gradient(45deg, #05b90b, #40ad46);
+  box-shadow: 0 0 8px 2px rgba(129, 199, 132, 0.7);
+}
+
+.nav-item:hover a.nav-link {
+  color: white;
+}
+
+/* Descripción */
+.descripcion-textarea {
+  background-color: #b4ddbf;
+  color: #065f2c;
+  border: 2px solid white;
+  border-radius: 8px;
+  font-weight: 600;
+  z-index: 1;
+}
+
+/* Opciones */
+.opcion-input {
+  background-color: #e6f4ea;
+  color: #065f2c;
+  border-radius: 8px;
+  border: 2px solid rgba(88, 158, 88, 0.452);
+  font-weight: 600;
+  z-index: 1;
+}
+
+/* Agregar opciones */
+.btn-outline-success {
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+
+/* Marca de agua UAM */
+.imagen-uam {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.img-uam-central {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.05; /* Más baja para efecto de marca de agua */
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  z-index: 0;
+  pointer-events: none; 
+}
+
+
+@media (max-width: 576px) {
+  .btn-outline-success, .btn-success {
+    font-size: 0.95rem;
+    padding: 10px 16px;
+  }
+}
+
+section, .form-control, .btn {
+  position: relative;
+  z-index: 1;
+}
+
+/* Botón de votar */
+button.btn-success {
+  background-color: #048a0f;
+  border: none;
+  border-radius: 12px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px 20px;
+  font-weight: 600;
+  color: white;
+}
+
+button.btn-success:hover {
+  background-color: #05b90b;
+  box-shadow: 0 0 10px rgba(5, 185, 11, 0.4);
+}

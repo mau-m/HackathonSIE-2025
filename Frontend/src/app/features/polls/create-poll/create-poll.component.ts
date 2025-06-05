@@ -1,20 +1,27 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';  // <-- Importa HttpClientModule aquí
 import { AuthService } from '../../../services/auth.service';
+import { FormularioService } from '../../../services/formulario.service';  
 
 @Component({
   selector: 'app-create-poll',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],  // <-- agrégalo aquí
   templateUrl: './create-poll.component.html',
-  styleUrl: './create-poll.component.css'
+  styleUrls: ['./create-poll.component.css']
 })
 export class CreatePollComponent {
   descripcion: string = '';
+  nombre: string = '';
+  pregunta: string = '';
   options: { valor: string }[] = [{ valor: '' }, { valor: '' }];
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private formularioService: FormularioService
+  ) {}
 
   login(): void {
     this.authService.loginWithGoogle()
@@ -41,10 +48,27 @@ export class CreatePollComponent {
     }
 
     const encuesta = {
+      nombre: this.nombre,
+      pregunta: this.pregunta,
       descripcion: this.descripcion,
       opciones: opcionesValidas
     };
 
-    console.log('Encuesta a guardar:', encuesta);
+    this.formularioService.crearFormularioConOpciones(encuesta)
+      .subscribe({
+        next: res => {
+          console.log('Encuesta creada', res);
+          alert('Encuesta creada correctamente');
+          // limpiar campos si quieres
+          this.nombre = '';
+          this.pregunta = '';
+          this.descripcion = '';
+          this.options = [{ valor: '' }, { valor: '' }];
+        },
+        error: err => {
+          console.error('Error al crear encuesta', err);
+          alert('Error al crear la encuesta');
+        }
+      });
   }
 }

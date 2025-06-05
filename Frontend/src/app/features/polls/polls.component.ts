@@ -1,33 +1,51 @@
-import { Component } from '@angular/core';
-import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { firebaseConfig } from '../../firebase.config';  // Asegúrate de que exista este archivo
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common'; 
+import { RouterModule, Router } from '@angular/router'; 
+import { FormularioService } from '../../services/formulario.service';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-
-
-
 
 @Component({
   selector: 'app-polls',
+  standalone: true,
+  imports: [CommonModule, RouterModule], 
   templateUrl: './polls.component.html',
   styleUrls: ['./polls.component.css']
 })
-export class PollsComponent {
-constructor(private authService: AuthService,private router: Router ) {}
+export class PollsComponent implements OnInit {
+  encuestas: any[] = [];
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private formularioService: FormularioService
+  ) {}
+
+  ngOnInit(): void {
+    this.cargarEncuestas();
+  }
 
   login() {
     this.authService.loginWithGoogle()
       .then(user => {
         console.log('Usuario logueado:', user);
-        // Aquí puedes manejar lo que quieres hacer con el usuario
       })
       .catch(err => {
         console.error('Error en login:', err);
       });
   }
 
-  irAVotar() {
-  this.router.navigate(['/vote-poll']);
-}
+  cargarEncuestas() {
+    this.formularioService.obtenerFormularios().subscribe({
+      next: (res: any) => {
+        this.encuestas = res;
+      },
+      error: (err) => {
+        console.error('Error al cargar encuestas:', err);
+      }
+    });
+  }
+
+  irAVotar(id: number) {
+    this.router.navigate(['/vote-poll', id]);
+  }
 }

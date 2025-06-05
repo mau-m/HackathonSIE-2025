@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const formularioRoutes = require('./routes/FormularioRoutes');
+const formularioRoutes = require('./routes/formularioRoutes');
+const votoRoutes = require('./routes/votoRoutes');
 const authenticateToken = require('./config/authMiddleware');
 const path = require('path');
 
@@ -15,11 +16,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Servir archivos estáticos desde la carpeta "public"
-//app.use(express.static(path.join(__dirname, 'public')));
-
 // Rutas protegidas (ejemplo con token)
 app.use('/api/v1/formulario', formularioRoutes); //FALTA AGREGAR EL MIDDLEWARE DEL TOKEN
+app.use('/api/v1/voto', votoRoutes); //FALTA AGREGAR EL MIDDLEWARE DEL TOKEN
 
 // Ruta por defecto
 app.get('/', (req, res) => {

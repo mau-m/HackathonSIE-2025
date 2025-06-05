@@ -9,8 +9,9 @@ const crearFormulario = async (req, res) => {
             return res.status(400).json({ message: 'Datos del formulario incompletos' });
         }
 
+        let usuario = "user_token";
         //const dto = new FormularioDTO(formulario, opciones);
-        const resultado = await FormularioService.crearFormulario(formulario, opciones);
+        const resultado = await FormularioService.crearFormulario(usuario, formulario, opciones);
         if (!resultado) {
             return res.status(400).json({ message: 'Error al crear el formulario' });
         }
@@ -44,8 +45,8 @@ const cerrarFormulario = async (req, res) => {
         }
 
         const resultado = await FormularioService.cerrarFormulario(id);
-
-        return res.status(200).json(resultado[0]);
+        
+        return res.status(200).json(resultado);
 
     } catch (error) {
         console.error('Error al obtener cerrar el formulario:', error);

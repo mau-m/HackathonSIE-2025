@@ -3,9 +3,9 @@ const OpcionDAO = require('../daos/OpcionDAO');
 const FormularioDTO = require('../dtos/FormularioDTO');
 const FormularioResponseDTO = require('../dtos/FormularioResponseDTO');
 
-async function crearFormulario(formulario, opciones) {
+async function crearFormulario(usuario, formulario, opciones) {
     //const { formulario, opciones } = formularioDTO;
-    if (!formulario.nombre || !formulario.descripcion || !formulario.pregunta) {
+    if (!usuario || !formulario.nombre || !formulario.descripcion || !formulario.pregunta) {
         throw new Error('Datos del formulario incompletos');
     }
     if (!Array.isArray(opciones) || opciones.length === 0) {
@@ -20,7 +20,8 @@ async function crearFormulario(formulario, opciones) {
         formulario.pregunta,
         fechaCreacion,
         true,
-        null
+        null,
+        usuario
     );
 
     const formularioId = nuevoFormulario.id;
@@ -90,10 +91,11 @@ async function cerrarFormulario(id) {
     if (!id) {
         throw new Error('Falta el parámetro id');
     }
-    const consulta = await FormularioDAO.formularioAbierto(id);
-    if (!consulta || consulta.estado === false) {
-        throw new Error('Formulario no encontrado o ya cerrado');
-    }
+    // const consulta = await FormularioDAO.formularioAbierto(id);
+    // console.log('Consulta:', consulta);
+    // if (!consulta || consulta.estado === false) {
+    //     throw new Error('Formulario no encontrado o ya cerrado');
+    // }
 
     const fechaCierre = new Date();
     const formularioCerrado = await FormularioDAO.cerrarFormulario(id, fechaCierre);
@@ -102,7 +104,13 @@ async function cerrarFormulario(id) {
         throw new Error('Formulario no encontrado o ya cerrado');
     }
 
-    return formularioCerrado;
+    const respuesta = {
+        id: formularioCerrado.id,
+        nombre: formularioCerrado.nombre,
+        estado: formularioCerrado.estado,
+        fechaCierre: formularioCerrado.fecha_cierre
+    };
+    return respuesta;
 }
 
 module.exports = {

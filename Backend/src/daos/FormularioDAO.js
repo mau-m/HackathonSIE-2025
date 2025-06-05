@@ -1,18 +1,18 @@
 const pool = require('../config/db');
 
-async function crearFormulario(nombre, descripcion, pregunta, fechaCreacion, estado, fechaCierre = null) {
+async function crearFormulario(nombre, descripcion, pregunta, fechaCreacion, estado, fechaCierre = null, usuario) {
     const query = `
-        INSERT INTO formularios (nombre, descripcion, pregunta, fecha_creacion, estado, fecha_cierre)
-        VALUES ($1, $2, $3, $4, $5, $6)
+        INSERT INTO formularios (nombre, descripcion, pregunta, fecha_creacion, estado, fecha_cierre, usuario)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
         RETURNING *;
     `;
-    const result = await pool.query(query, [nombre, descripcion, pregunta, fechaCreacion, estado, fechaCierre]);
+    const result = await pool.query(query, [nombre, descripcion, pregunta, fechaCreacion, estado, fechaCierre, usuario]);
     return result.rows[0];
 }
 
 async function obtenerFormularios() {
     const query = `
-        SELECT nombre, descripcion FROM formularios;
+        SELECT id, nombre, descripcion FROM formularios;
     `;
     const result = await pool.query(query);
     return result.rows;
@@ -45,7 +45,7 @@ async function cerrarFormulario(id, fechaCierre) {
 async function formularioAbierto(id) {
     const query = `SELECT estado FROM formularios WHERE id = $1`;
     const result = await pool.query(query, [id]);
-    return result[0];
+    return result.rows[0];
 }
 
 module.exports = {

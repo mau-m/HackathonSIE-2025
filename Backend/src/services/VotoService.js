@@ -1,17 +1,29 @@
 const VotoDAO = require('../daos/VotoDAO')
 
 async function crearVoto(voto) {
-    if(!voto.usuario || !voto.formularioId || !voto.opcionId) {
-        throw new Error('Datos del formulario incompletos');
-    }
 
-    let fechaCreacion = Date()
-    const voto = await VotoDAO.crearVoto(
+    let fechaCreacion = Date.now();
+    const resultado = await VotoDAO.crearVoto(
         voto.usuario,
         voto.formularioId,
-        voto.opcionId,
-        fechaCreacion
-    )
+        voto.opcionId
+    );
 
-    
+    return resultado;
+}
+
+async function votantes(id) {
+    const resultado = await VotoDAO.votantes(id);
+    return resultado;
+}
+
+async function obtenerVotos(id) {
+    const resultado = await VotoDAO.obtenerVotos(id);
+    return resultado;
+}
+
+module.exports = {
+    crearVoto,
+    votantes,
+    obtenerVotos
 }

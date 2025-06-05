@@ -1,0 +1,71 @@
+<!-- Contenedor principal -->
+<div class="container-fluid d-flex flex-column align-items-center vh-100 py-2 px-3 px-sm-4 px-md-5">
+
+    <!-- Encabezado -->
+    <section class="consulta d-flex w-100 mb-1 align-items-center justify-content-between flex-wrap">
+        <!-- Etiqueta izquierda -->
+        <div class="etiqueta flex-grow-1 text-center py-3">
+            <h2 class="m-0 fs-3">Votaciones</h2>
+        </div>
+
+        <!-- Imagen de login a la derecha -->
+        <div class="datos-form pe-3">
+            <img src="/assets/img/user2.png" alt="Login" class="rounded-circle"
+                style="width: 40px; height: 40px; cursor: pointer;" (click)="login()" />
+        </div>
+    </section>
+
+    <!-- Barra de navegación -->
+    <nav class="nav-bar d-flex w-100 mb-3">
+        <div class="nav-item flex-fill text-center border border-dark border-end-0 py-2">
+            <a href="/polls" class="nav-link">Inicio</a>
+        </div>
+        <div class="nav-item flex-fill text-center border border-dark border-end-0 py-2">
+            <a href="/create-poll" class="nav-link">Crear</a>
+        </div>
+        <div class="nav-item flex-fill text-center border border-dark py-2">
+            <a href="/consult-poll" class="nav-link">Consultar</a>
+        </div>
+    </nav>
+
+    <!-- Contenido principal de votación -->
+    <section class="w-100 d-flex flex-column align-items-center">
+
+        <!-- Nombre del creador -->
+        <div class="text-center mb-2">
+            <p class="fw-semibold text-success m-0">Encuesta: {{ creador }}</p>
+        </div>
+
+        <!-- Descripción solo lectura -->
+        <div class="descripcion-texto align-items-center mb-5 px-3 py-2 w-50">
+            <strong>{{ descripcion }}</strong>
+        </div>
+
+        <!-- Opciones de votación -->
+        <div class="w-50 mb-4 d-flex flex-column align-items-center">
+  <div *ngFor="let opcion of opciones"
+       class="opcion-voto"
+       [class.seleccionada]="opcion.id === opcionSeleccionadaId"
+       (click)="opcionSeleccionadaId = opcion.id">
+       
+    <label class="opcion-label d-flex align-items-center">
+      <input
+        type="radio"
+        name="opciones"
+        [value]="opcion.id"
+        [(ngModel)]="opcionSeleccionadaId"
+        (click)="$event.stopPropagation()" />
+      <span class="texto-opcion ms-2">{{ opcion.opcion }}</span>
+    </label>
+  </div>
+</div>
+
+
+        <!-- Botón votar -->
+        <div class="mb-5">
+            <button class="btn btn-success btn-lg" (click)="votar()">Enviar voto</button>
+        </div>
+
+    </section>
+
+</div>

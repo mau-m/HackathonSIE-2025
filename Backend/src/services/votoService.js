@@ -1,12 +1,10 @@
-const VotoDAO = require('../daos/VotoDAO')
+const VotoDAO = require('../daos/votoDAO');
 
-async function crearVoto(voto) {
-
-    let fechaCreacion = Date.now();
+async function crearVoto(usuario, formularioId, opcionId) {
     const resultado = await VotoDAO.crearVoto(
-        voto.usuario,
-        voto.formularioId,
-        voto.opcionId
+        usuario,
+        formularioId,
+        opcionId
     );
 
     return resultado;

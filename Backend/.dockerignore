@@ -1,0 +1,8 @@
+# Node modules
+node_modules/
+
+# Schema DB
+schemas.sql
+
+# Environment
+.env*

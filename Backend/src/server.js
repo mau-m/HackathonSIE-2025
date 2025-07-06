@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const formularioRoutes = require('./routes/formularioRoutes');
 const votoRoutes = require('./routes/votoRoutes');
-const authenticateToken = require('./config/authMiddleware');
 const path = require('path');
 
 const port = process.env.PORT || 3000;

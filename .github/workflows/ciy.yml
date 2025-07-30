@@ -1,0 +1,42 @@
+name: Build image
+
+on:
+    push:
+        branches:
+            - main
+
+env:
+    REGISTRY: ghcr.io
+    IMAGE_NAME: ${{ github.repository_owner }}/backHack
+
+jobs:
+    build-and-push-docker-image:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            packages: write
+        
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v4
+
+            - name: Login in to GHCR
+              uses: docker/login-action@v3
+
+            - name: Extract metadata (tags, label) for Docker
+              id: meta
+              uses: docker/metadata-action@v5
+              with:
+                images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+                tags: |
+                    type=raw,value=latest
+                    type=raw,value={{version}}
+                    type=sha,format=short
+
+            - name: Build and push to GHCR
+              uses: docker/build-push-action@v5
+              with:
+                context: Backend
+                push: true
+                tags: ${{ steps.meta.outputs.tags }}
+                labels: ${{ steps.meta.outputs.labels }}

@@ -22,6 +22,10 @@ jobs:
 
             - name: Login in to GHCR
               uses: docker/login-action@v3
+              with:
+                registry: ${{ env.REGISTRY }}
+                username: ${{ github.actor }}
+                password: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Extract metadata (tags, label) for Docker
               id: meta
